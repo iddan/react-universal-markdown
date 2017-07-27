@@ -3,5 +3,7 @@
   "[javascriptreact]": {
     "editor.formatOnSave": true
   },
-  "files.exclude": {}
+  "files.exclude": {
+    "node_modules/": "explorerExcludedFiles"
+  }
 }
