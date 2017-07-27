@@ -2,11 +2,7 @@
   "name": "react-universal-markdown",
   "version": "0.0.4",
   "main": "index.js",
-  "author": {
-    "email": "mail@aniddan.com",
-    "name": "Iddan Aharonson",
-    "url": "https://github.com/iddan"
-  },
+  "author": "Iddan Aharonson <mail@aniddan.com> (https://github.com/iddan)",
   "peerDependencies": {
     "react": "16.0.0-alpha.12",
     "react-native": "^0.46.4"
@@ -18,5 +14,25 @@
   "dependencies": {
     "commonmark": "^0.27.0",
     "lodash.mapvalues": "^4.6.0"
-  }
+  },
+  "description": "Markdown component for Web and Native powered by CommonMark Edit",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iddan/react-universal-markdown.git"
+  },
+  "keywords": [
+    "react",
+    "markdown",
+    "native",
+    "web",
+    "commonmark"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/iddan/react-universal-markdown/issues"
+  },
+  "homepage": "https://github.com/iddan/react-universal-markdown#readme"
 }
