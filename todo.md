@@ -1,0 +1,5 @@
+ - performance
+ - children keys
+ - default styles for native
+ - better component names?
+ - readme

@@ -1,0 +1,7 @@
+{
+  "eslint.enable": true,
+  "[javascriptreact]": {
+    "editor.formatOnSave": true
+  },
+  "files.exclude": {}
+}
