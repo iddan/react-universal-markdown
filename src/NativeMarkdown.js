@@ -8,44 +8,44 @@ const LineBreak = ({ style }) =>
     {"\n"}
   </Text>;
 
-const Native = {
-  text: ({ style, children }) =>
+export const NativeComponents = {
+  Text: ({ style, children }) =>
     <Text style={style}>
       {children}
     </Text>,
-  linebreak: LineBreak,
-  softbreak: LineBreak,
-  emph: ({ style, children }) =>
+  LineBreak: LineBreak,
+  SoftBreak: LineBreak,
+  Em: ({ style, children }) =>
     <Text style={style}>
       {children}
     </Text>,
-  strong: ({ style, children }) =>
+  Strong: ({ style, children }) =>
     <Text style={style}>
       {children}
     </Text>,
-  link: ({ style, title, destination, children }) =>
+  Link: ({ style, title, destination, children }) =>
     <Text style={style}>
       {children}
     </Text>,
-  image: ({ style, title, destination }) =>
+  Image: ({ style, title, destination }) =>
     <Image style={style} source={{ uri: destination }} />, // @TODO handle title
-  code: ({ style, children }) =>
+  Code: ({ style, children }) =>
     <Text style={style}>
       {children}
     </Text>,
-  paragraph: ({ style, children }) =>
+  Paragraph: ({ style, children }) =>
     <View style={style}>
       {children}
     </View>,
-  block_quote: ({ style, children }) =>
+  BlockQuote: ({ style, children }) =>
     <View style={style}>
       {children}
     </View>,
-  item: ({ style, children }) =>
+  Item: ({ style, children }) =>
     <View style={style}>
       {children}
     </View>,
-  list: ({ style, children, listType, listStart }) => {
+  List: ({ style, children, listType, listStart }) => {
     switch (listType) {
       case "ordered": {
         return (
@@ -63,7 +63,7 @@ const Native = {
       }
     }
   },
-  heading: ({ style, children, level }) => {
+  Heading: ({ style, children, level }) => {
     const Heading = "h" + level;
     return (
       <Heading style={style}>
@@ -71,14 +71,14 @@ const Native = {
       </Heading>
     );
   },
-  code_block: ({ style, children, info }) =>
+  CodeBlock: ({ style, children, info }) =>
     <View style={style}>
       <Text>
         {children}
       </Text>
     </View>,
-  thematic_break: ({ style }) => <View style={style} />,
-  document: ({ style, children }) =>
+  ThematicBreak: ({ style }) => <View style={style} />,
+  Document: ({ style, children }) =>
     <View style={style}>
       {children}
     </View>
@@ -89,11 +89,13 @@ const defaultStyles = {};
 const NativeMarkdown = props =>
   <Markdown
     {...props}
-    components={mapValues(Native, (Component, name) => componentProps =>
-      <Component
-        {...componentProps}
-        style={[defaultStyles[name], props.styles[name]]}
-      />
+    components={mapValues(
+      NativeComponents,
+      (Component, name) => componentProps =>
+        <Component
+          {...componentProps}
+          style={[defaultStyles[name], props.styles[name]]}
+        />
     )}
   />;
 

@@ -3,43 +3,43 @@ import Markdown from "./Markdown";
 
 const LineBreak = () => <br />;
 
-const DOM = {
-  text: ({ children }) =>
+export const DOMComponents = {
+  Text: ({ children }) =>
     <span>
       {children}
     </span>,
-  linebreak: LineBreak,
-  softbreak: LineBreak,
-  emph: ({ children }) =>
+  LineBreak: LineBreak,
+  SoftBreak: LineBreak,
+  Em: ({ children }) =>
     <em>
       {children}
     </em>,
-  strong: ({ children }) =>
+  Strong: ({ children }) =>
     <strong>
       {children}
     </strong>,
-  link: ({ title, destination, children }) =>
+  Link: ({ title, destination, children }) =>
     <a title={title} href={destination}>
       {children}
     </a>,
-  image: ({ title, destination }) => <img src={destination} title={title} />,
-  code: ({ children }) =>
+  Image: ({ title, destination }) => <img src={destination} title={title} />,
+  Code: ({ children }) =>
     <code>
       {children}
     </code>,
-  paragraph: ({ children }) =>
+  Paragraph: ({ children }) =>
     <p>
       {children}
     </p>,
-  block_quote: ({ children }) =>
+  BlockQuote: ({ children }) =>
     <blockquote>
       {children}
     </blockquote>,
-  item: ({ children }) =>
+  Item: ({ children }) =>
     <li>
       {children}
     </li>,
-  list: ({ children, listType, listStart }) => {
+  List: ({ children, listType, listStart }) => {
     switch (listType) {
       case "ordered": {
         return (
@@ -57,7 +57,7 @@ const DOM = {
       }
     }
   },
-  heading: ({ children, level }) => {
+  Heading: ({ children, level }) => {
     const Heading = "h" + level;
     return (
       <Heading>
@@ -65,19 +65,30 @@ const DOM = {
       </Heading>
     );
   },
-  code_block: ({ children, info }) =>
+  CodeBlock: ({ children, info }) =>
     <pre>
       <code>
         {children}
       </code>
     </pre>,
-  thematic_break: () => <hr />,
-  document: ({ children }) =>
-    <div>
+  ThematicBreak: () => <hr />,
+  Document: ({ className, children }) =>
+    <div className={className}>
       {children}
     </div>
 };
 
-const DOMMarkdown = props => <Markdown {...props} components={DOM} />;
+const DOMMarkdown = props =>
+  <Markdown
+    {...props}
+    components={{
+      ...DOMComponents,
+      Document: componentProps =>
+        <DOMComponents.Document
+          {...componentProps}
+          className={props.className}
+        />
+    }}
+  />;
 
 export default DOMMarkdown;
