@@ -5,6 +5,7 @@
     "editor.formatOnSave": true
   },
   "files.exclude": {
-    "node_modules/": "explorerExcludedFiles"
+    "node_modules/": "explorerExcludedFiles",
+    "coverage/": "explorerExcludedFiles"
   }
 }
