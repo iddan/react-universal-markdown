@@ -44,7 +44,7 @@ export const NativeComponents = {
     </View>,
   Item: ({style, children}) =>
     <View style={style}>
-      <Text>•</Text>
+      <Text> • </Text>
       {children}
     </View>,
   List: ({style, children, listType, listStart}) => {
