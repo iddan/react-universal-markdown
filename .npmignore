@@ -1,0 +1,6 @@
+.vscode/
+assets
+node_modules/
+.babelrc
+.travis.yml
+todo.md
