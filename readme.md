@@ -1,3 +1,5 @@
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bhttps%3A%2F%2Fgithub.com%2Fiddan%2Freact-universal-markdown.svg?type=shield)](https://app.fossa.io/projects/git%2Bhttps%3A%2F%2Fgithub.com%2Fiddan%2Freact-universal-markdown?ref=badge_shield)
+
 <div align="center">
   <img alt="Markdown Logo" width="195" src="https://cdn.rawgit.com/iddan/react-universal-markdown/master/assets/markdown.svg" />
   <img alt="React Logo" width="300" src="https://upload.wikimedia.org/wikipedia/en/a/a7/React-icon.svg" />
@@ -113,3 +115,7 @@ NativeComponents default components prop value
      Document : Class<Component> | (props) => ReactElement,
  }
  ```
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bhttps%3A%2F%2Fgithub.com%2Fiddan%2Freact-universal-markdown.svg?type=large)](https://app.fossa.io/projects/git%2Bhttps%3A%2F%2Fgithub.com%2Fiddan%2Freact-universal-markdown?ref=badge_large)
