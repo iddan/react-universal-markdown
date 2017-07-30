@@ -40,9 +40,7 @@ export const NativeComponents = {
     </View>,
   BlockQuote: ({style, children}) =>
     <View style={style}>
-      <Text>
-        {children}
-      </Text>
+      {children}
     </View>,
   Item: ({style, children}) =>
     <View style={style}>
