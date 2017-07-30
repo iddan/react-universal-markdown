@@ -15,9 +15,9 @@ const render = (components, customizer = defaultCustomizer, node) => {
       {!children.length
         ? node.literal
         : customizer(
-          child =>
+          (child, i) =>
             React.cloneElement(render(components, customizer, child), {
-              key: children.indexOf(child),
+              key: i,
             }),
           children,
         )}
