@@ -1,12 +1,27 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import {View, Text, StyleSheet, Image} from 'react-native';
 import mapValues from 'lodash.mapvalues';
 import shallowEqual from 'shallowequal';
 import Markdown from './Markdown';
 
-const pureAndUpdateForStyles = render =>
+const createMarkdownElement = render =>
   class extends Component {
     static displayName = render.name;
+
+    static contextTypes = {
+      textStyle: PropTypes.array,
+    };
+
+    static childContextTypes = {
+      textStyle: PropTypes.array,
+    };
+
+    getChildContext() {
+      return {
+        textStyle: [this.context.textStyle, this.props.textStyle],
+      };
+    }
 
     shouldComponentUpdate(nextProps) {
       const {styles, ...rest} = this.props;
@@ -15,7 +30,8 @@ const pureAndUpdateForStyles = render =>
     }
 
     render() {
-      return render(this.props);
+      const {textStyle} = this.context;
+      return render({...this.props, textStyle});
     }
   };
 
@@ -26,8 +42,8 @@ const LineBreak = ({style}) =>
 
 export const NativeComponents = mapValues(
   {
-    Text: ({style, children}) =>
-      <Text style={style}>
+    Text: ({style, textStyle, children}) =>
+      <Text style={[style, textStyle]}>
         {children}
       </Text>,
     LineBreak,
@@ -103,7 +119,7 @@ export const NativeComponents = mapValues(
         {children}
       </View>,
   },
-  pureAndUpdateForStyles,
+  createMarkdownElement,
 );
 
 const defaultStyles = StyleSheet.create({
@@ -172,6 +188,7 @@ class NativeMarkdown extends Component {
   components = mapValues(NativeComponents, (ElementComponent, name) => props =>
     <ElementComponent
       {...props}
+      textStyle={[defaultStyles[name + 'Text'], this.props.styles[name + 'Text']]}
       styles={{...defaultStyles, ...this.props.styles}}
       style={[defaultStyles[name], this.props.styles[name]]}
     />,
