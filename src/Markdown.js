@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Parser } from "commonmark";
+import shallowEqual from "shallowequal";
 import { getChildren } from "./util";
 import COMPONENT_NAMES from "./component-names";
 
@@ -15,7 +16,13 @@ const render = (components, customizer = defaultCustomizer, node) => {
     >
       {!children.length
         ? node.literal
-        : customizer(child => render(components, customizer, child), children)}
+        : customizer(
+            child =>
+              React.cloneElement(render(components, customizer, child), {
+                key: children.indexOf(child)
+              }),
+            children
+          )}
     </NodeComponent>
   );
 };

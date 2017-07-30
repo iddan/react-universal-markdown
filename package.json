@@ -4,20 +4,28 @@
   "main": "src/index.js",
   "author": "Iddan Aharonson <mail@aniddan.com> (https://github.com/iddan)",
   "peerDependencies": {
-    "react": "16.0.0-alpha.12",
     "react-native": "^0.46.4"
   },
   "devDependencies": {
+    "babel-jest": "^20.0.3",
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-react": "^6.24.1",
+    "eslint": "^4.3.0",
     "eslint-config-fbjs-opensource": "^1.0.0",
-    "prettier": "^1.5.3"
+    "jest": "^20.0.4",
+    "prettier": "^1.5.3",
+    "react": "^16.0.0-alpha.12",
+    "react-dom": "16.0.0-alpha.12"
   },
   "dependencies": {
     "commonmark": "^0.27.0",
-    "lodash.mapvalues": "^4.6.0"
+    "lodash.mapvalues": "^4.6.0",
+    "shallowequal": "^1.0.2"
   },
   "description": "Markdown component for Web and Native powered by CommonMark",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -34,5 +42,10 @@
   "bugs": {
     "url": "https://github.com/iddan/react-universal-markdown/issues"
   },
-  "homepage": "https://github.com/iddan/react-universal-markdown#readme"
+  "homepage": "https://github.com/iddan/react-universal-markdown#readme",
+  "jest": {
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    }
+  }
 }
