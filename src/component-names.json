@@ -1,7 +1,7 @@
 {
   "text": "Text",
-  "lineBreak": "LineBreak",
-  "softBreak": "SoftBreak",
+  "linebreak": "LineBreak",
+  "softbreak": "SoftBreak",
   "emph": "Em",
   "strong": "Strong",
   "link": "Link",

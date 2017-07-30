@@ -96,7 +96,7 @@ const defaultStyles = StyleSheet.create({
     fontWeight: 'bold',
   },
   Link: {
-    // underline
+    textDecorationLine: 'underline',
   },
   Image: {
     // sizing
@@ -134,6 +134,7 @@ const defaultStyles = StyleSheet.create({
     height: 1,
     marginTop: 8,
     marginBottom: 8,
+    backgroundColor: '#cccccc',
   },
   Document: {
     margin: 8,
