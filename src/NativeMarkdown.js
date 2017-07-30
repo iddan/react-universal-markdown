@@ -115,6 +115,7 @@ const defaultStyles = StyleSheet.create({
   },
   Item: {
     flexDirection: 'row',
+    alignItems: 'flex-start',
   },
   List: {},
   Heading: {
