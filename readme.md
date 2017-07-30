@@ -1,4 +1,19 @@
 <div align="center">
+  <p>
+    <a href="https://npm.im/react-universal-markdown">
+        <img src="https://img.shields.io/npm/v/react-universal-markdown.svg"
+              alt="NPM Version" />
+    </a>
+    <a href="https://snyk.io/test/github/iddan/react-universal-markdown">
+        <img src="https://snyk.io/test/npm/react-universal-markdown/badge.svg"
+              alt="Known Vulnerabilities"
+              data-canonical-src="https://snyk.io/test/npm/react-universal-markdown"/>
+    </a>
+    <a href="https://travis-ci.org/iddan/react-universal-markdown">
+      <img src="https://travis-ci.org/iddan/react-universal-markdown.svg?branch=master" />
+    </a>
+    <a href="https://app.fossa.io/projects/git%2Bhttps%3A%2F%2Fgithub.com%2Fiddan%2Freact-universal-markdown?ref=badge_shield" alt="FOSSA Status"><img src="https://app.fossa.io/api/projects/git%2Bhttps%3A%2F%2Fgithub.com%2Fiddan%2Freact-universal-markdown.svg?type=shield"/></a>
+  </p>
   <img alt="Markdown Logo" width="195" src="https://cdn.rawgit.com/iddan/react-universal-markdown/master/assets/markdown.svg" />
   <img alt="React Logo" width="300" src="https://upload.wikimedia.org/wikipedia/en/a/a7/React-icon.svg" />
   <h1>react-universal-markdown</h1>
