@@ -1,91 +1,110 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {View, Text, StyleSheet, Image} from 'react-native';
 import mapValues from 'lodash.mapvalues';
+import shallowEqual from 'shallowequal';
 import Markdown from './Markdown';
+
+const pureAndUpdateForStyles = render =>
+  class extends Component {
+    static displayName = render.name;
+
+    shouldComponentUpdate(nextProps) {
+      const {styles, ...rest} = this.props;
+      const {nextStyles, ...nextRest} = nextProps;
+      return !shallowEqual(styles, nextStyles) || !shallowEqual(rest, nextRest);
+    }
+
+    render() {
+      return render(this.props);
+    }
+  };
 
 const LineBreak = ({style}) =>
   <Text style={style}>
     {'\n'}
   </Text>;
 
-export const NativeComponents = {
-  Text: ({style, children}) =>
-    <Text style={style}>
-      {children}
-    </Text>,
-  LineBreak,
-  SoftBreak: LineBreak,
-  Em: ({style, children}) =>
-    <Text style={style}>
-      {children}
-    </Text>,
-  Strong: ({style, children}) =>
-    <Text style={style}>
-      {children}
-    </Text>,
-  Link: ({style, title, destination, children}) =>
-    <Text style={style}>
-      {children}
-    </Text>,
-  Image: ({style, title, destination}) => <Image style={style} source={{uri: destination}} />, // @TODO handle title
-  Code: ({style, children}) =>
-    <Text style={style}>
-      {children}
-    </Text>,
-  Paragraph: ({style, children}) =>
-    <View style={style}>
-      <Text>
-        {children}
-      </Text>
-    </View>,
-  BlockQuote: ({style, children}) =>
-    <View style={style}>
-      {children}
-    </View>,
-  Item: ({style, children}) =>
-    <View style={style}>
-      <Text> • </Text>
-      {children}
-    </View>,
-  List: ({style, children, listType, listStart}) => {
-    switch (listType) {
-      case 'ordered': {
-        return (
-          <View style={style}>
-            {children}
-          </View>
-        );
-      }
-      default: {
-        return (
-          <View style={style}>
-            {children}
-          </View>
-        );
-      }
-    }
-  },
-  Heading: ({styles, style, children, level}) => {
-    return (
-      <View>
-        <Text style={[style, styles['H' + level]]}>
-          {children}
-        </Text>
-      </View>
-    );
-  },
-  CodeBlock: ({style, children, info}) =>
-    <View>
+export const NativeComponents = mapValues(
+  {
+    Text: ({style, children}) =>
       <Text style={style}>
         {children}
-      </Text>
-    </View>,
-  ThematicBreak: ({style}) => <View style={style} />,
-  Document: ({style, children}) =>
-    <View style={style}>
-      {children}
-    </View>,
-};
+      </Text>,
+    LineBreak,
+    SoftBreak: LineBreak,
+    Em: ({style, children}) =>
+      <Text style={style}>
+        {children}
+      </Text>,
+    Strong: ({style, children}) =>
+      <Text style={style}>
+        {children}
+      </Text>,
+    Link: ({style, title, destination, children}) =>
+      <Text style={style}>
+        {children}
+      </Text>,
+    Image: ({style, title, destination}) => <Image style={style} source={{uri: destination}} />, // @TODO handle title
+    Code: ({style, children}) =>
+      <Text style={style}>
+        {children}
+      </Text>,
+    Paragraph: ({style, children}) =>
+      <View style={style}>
+        <Text>
+          {children}
+        </Text>
+      </View>,
+    BlockQuote: ({style, children}) =>
+      <View style={style}>
+        {children}
+      </View>,
+    Item: ({style, children}) =>
+      <View style={style}>
+        <Text> • </Text>
+        {children}
+      </View>,
+    List: ({style, children, listType, listStart}) => {
+      switch (listType) {
+        case 'ordered': {
+          return (
+            <View style={style}>
+              {children}
+            </View>
+          );
+        }
+        default: {
+          return (
+            <View style={style}>
+              {children}
+            </View>
+          );
+        }
+      }
+    },
+    Heading: ({styles, style, children, level}) => {
+      return (
+        <View>
+          <Text style={[style, styles['H' + level]]}>
+            {children}
+          </Text>
+        </View>
+      );
+    },
+    CodeBlock: ({style, children, info}) =>
+      <View>
+        <Text style={style}>
+          {children}
+        </Text>
+      </View>,
+    ThematicBreak: ({style}) => <View style={style} />,
+    Document: ({style, children}) =>
+      <View style={style}>
+        {children}
+      </View>,
+  },
+  pureAndUpdateForStyles,
+);
 
 const defaultStyles = StyleSheet.create({
   Em: {
@@ -143,16 +162,24 @@ const defaultStyles = StyleSheet.create({
   },
 });
 
-const NativeMarkdown = props =>
-  <Markdown
-    {...props}
-    components={mapValues(NativeComponents, (Component, name) => componentProps =>
-      <Component
-        {...componentProps}
-        styles={{...defaultStyles, ...props.styles}}
-        style={[defaultStyles[name], props.styles[name]]}
-      />,
-    )}
-  />;
+class NativeMarkdown extends Component {
+  shouldComponentUpdate(nextProps) {
+    const {styles, ...rest} = this.props;
+    const {nextStyles, ...nextRest} = nextProps;
+    return !shallowEqual(styles, nextStyles) || !shallowEqual(rest, nextRest);
+  }
+
+  components = mapValues(NativeComponents, (ElementComponent, name) => props =>
+    <ElementComponent
+      {...props}
+      styles={{...defaultStyles, ...this.props.styles}}
+      style={[defaultStyles[name], this.props.styles[name]]}
+    />,
+  );
+
+  render() {
+    return <Markdown {...this.props} components={this.components} />;
+  }
+}
 
 export default NativeMarkdown;

@@ -1,5 +1,3 @@
  - performance
- - children keys
- - default styles for native
- - tests
+ - default styles for native (50% done)
  - examples

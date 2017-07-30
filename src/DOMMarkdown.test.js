@@ -128,19 +128,3 @@ test('Document', () => {
     ),
   ).toBe('<div class="test"></div>');
 });
-test('Mixed', () => {
-  expect(
-    renderToStaticMarkup(
-      <DOMMarkdown >{`__Blepharitis__ is inflammation of the eyelids near the eyelashes. __Blepharitis__ occurs in two forms:
-  - __Anterior Blepharitis__ affects the outside front of the eyelid, where the eyelashes are attached. 
-  - __Posterior Blepharitis__ affects the inner eyelid (the moist part that makes contact with the eye).
-  &nbsp;
-  Common causes of anterior __blepharitis__ are bacterial infection (*Staphylococcus*) and a skin condition called *seborrheic dermatitis*. __Posterior blepharitis__ is often caused by problems with the oil glands in this part of the eyelid. It is associated with other skin conditions like *acne rosacea* and *seborrheic dermatitis*.
-  > hello
-  > hey
-> jo`}</DOMMarkdown>,
-    ),
-  ).toBe(
-    '<div><p><strong><span>Blepharitis</span></strong><span> is inflammation of the eyelids near the eyelashes. </span><strong><span>Blepharitis</span></strong><span> occurs in two forms:</span></p><ul><li><p><strong><span>Anterior Blepharitis</span></strong><span> affects the outside front of the eyelid, where the eyelashes are attached.</span></p></li><li><p><strong><span>Posterior Blepharitis</span></strong><span> affects the inner eyelid (the moist part that makes contact with the eye).</span><br/><span> </span><br/><span>Common causes of anterior </span><strong><span>blepharitis</span></strong><span> are bacterial infection (</span><em><span>Staphylococcus</span></em><span>) and a skin condition called </span><em><span>seborrheic dermatitis</span></em><span>. </span><strong><span>Posterior blepharitis</span></strong><span> is often caused by problems with the oil glands in this part of the eyelid. It is associated with other skin conditions like </span><em><span>acne rosacea</span></em><span> and </span><em><span>seborrheic dermatitis</span></em><span>.</span></p></li></ul><blockquote><p><span>hello</span><br/><span>hey</span><br/><span>jo</span></p></blockquote></div>',
-  );
-});

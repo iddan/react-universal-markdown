@@ -1,47 +1,47 @@
-import React from "react";
-import Markdown from "./Markdown";
+import React, {Component} from 'react';
+import Markdown from './Markdown';
 
 const LineBreak = () => <br />;
 
 export const DOMComponents = {
-  Text: ({ children }) =>
+  Text: ({children}) =>
     <span>
       {children}
     </span>,
-  LineBreak: LineBreak,
+  LineBreak,
   SoftBreak: LineBreak,
-  Em: ({ children }) =>
+  Em: ({children}) =>
     <em>
       {children}
     </em>,
-  Strong: ({ children }) =>
+  Strong: ({children}) =>
     <strong>
       {children}
     </strong>,
-  Link: ({ title, destination, children }) =>
+  Link: ({title, destination, children}) =>
     <a title={title} href={destination}>
       {children}
     </a>,
-  Image: ({ title, destination }) => <img src={destination} title={title} />,
-  Code: ({ children }) =>
+  Image: ({title, destination}) => <img src={destination} title={title} />,
+  Code: ({children}) =>
     <code>
       {children}
     </code>,
-  Paragraph: ({ children }) =>
+  Paragraph: ({children}) =>
     <p>
       {children}
     </p>,
-  BlockQuote: ({ children }) =>
+  BlockQuote: ({children}) =>
     <blockquote>
       {children}
     </blockquote>,
-  Item: ({ children }) =>
+  Item: ({children}) =>
     <li>
       {children}
     </li>,
-  List: ({ children, listType, listStart }) => {
+  List: ({children, listType, listStart}) => {
     switch (listType) {
-      case "ordered": {
+      case 'ordered': {
         return (
           <ol start={listStart}>
             {children}
@@ -57,38 +57,41 @@ export const DOMComponents = {
       }
     }
   },
-  Heading: ({ children, level }) => {
-    const Heading = "h" + level;
+  Heading: ({children, level}) => {
+    const Heading = 'h' + level;
     return (
       <Heading>
         {children}
       </Heading>
     );
   },
-  CodeBlock: ({ children, info }) =>
+  CodeBlock: ({children, info}) =>
     <pre>
       <code>
         {children}
       </code>
     </pre>,
   ThematicBreak: () => <hr />,
-  Document: ({ className, children }) =>
+  Document: ({className, children}) =>
     <div className={className}>
       {children}
-    </div>
+    </div>,
 };
 
-const DOMMarkdown = props =>
-  <Markdown
-    {...props}
-    components={{
-      ...DOMComponents,
-      Document: componentProps =>
-        <DOMComponents.Document
-          {...componentProps}
-          className={props.className}
-        />
-    }}
-  />;
+class DOMMarkdown extends Component {
+  Document = props => <DOMComponents.Document {...props} className={this.props.className} />;
+
+  render() {
+    return (
+      <Markdown
+        {...this.props}
+        components={{
+          ...DOMComponents,
+          Document: this.Document,
+        }}
+      />
+    );
+  }
+}
 
 export default DOMMarkdown;
