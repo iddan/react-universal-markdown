@@ -1,3 +1,5 @@
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bhttps%3A%2F%2Fgithub.com%2Fiddan%2Freact-universal-markdown.svg?type=shield)](https://app.fossa.io/projects/git%2Bhttps%3A%2F%2Fgithub.com%2Fiddan%2Freact-universal-markdown?ref=badge_shield)
+
 <div align="center">
   <p>
     <a href="https://npm.im/react-universal-markdown">
@@ -128,3 +130,7 @@ NativeComponents default components prop value
      Document : Class<Component> | (props) => ReactElement,
  }
  ```
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bhttps%3A%2F%2Fgithub.com%2Fiddan%2Freact-universal-markdown.svg?type=large)](https://app.fossa.io/projects/git%2Bhttps%3A%2F%2Fgithub.com%2Fiddan%2Freact-universal-markdown?ref=badge_large)
