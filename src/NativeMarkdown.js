@@ -44,6 +44,7 @@ export const NativeComponents = {
     </View>,
   Item: ({style, children}) =>
     <View style={style}>
+      <Text>•</Text>
       {children}
     </View>,
   List: ({style, children, listType, listStart}) => {
@@ -112,7 +113,9 @@ const defaultStyles = StyleSheet.create({
     borderLeftWidth: 2,
     borderLeftColor: 'grey',
   },
-  Item: {},
+  Item: {
+    flexDirection: 'row',
+  },
   List: {},
   Heading: {
     fontWeight: 'bold',
