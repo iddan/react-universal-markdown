@@ -12,6 +12,7 @@
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
     "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.24.1",
+    "coveralls": "^2.13.1",
     "eslint": "^4.3.0",
     "eslint-config-fbjs-opensource": "^1.0.0",
     "jest": "^20.0.4",
@@ -26,7 +27,7 @@
   },
   "description": "Markdown component for Web and Native powered by CommonMark",
   "scripts": {
-    "test": "jest"
+    "test": "jest && cat ./coverage/lcov.info | coveralls"
   },
   "repository": {
     "type": "git",
