@@ -2,7 +2,7 @@
  * @param {Node} node - CommonMark AST Node
  * @yields {Node} - the node's children
  */
-export function* getChildren(node) {
+export function *getChildren(node) {
   let child = node.firstChild;
   if (!child) {
     return;

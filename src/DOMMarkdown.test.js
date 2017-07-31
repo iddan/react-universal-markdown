@@ -1,5 +1,5 @@
 import React from 'react';
-import {renderToStaticMarkup} from 'react-dom/server';
+import { renderToStaticMarkup } from 'react-dom/server';
 import DOMMarkdown from './DOMMarkdown';
 
 test('Em', () => {

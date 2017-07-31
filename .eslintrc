@@ -1,6 +1,7 @@
 {
   "extends": "fbjs-opensource",
   "rules": {
-    "react/prop-types": [0]
+    "react/prop-types": [0],
+    "object-curly-spacing": ["warn", "always", { "objectsInObjects": false }]
   }
 }

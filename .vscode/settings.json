@@ -1,4 +1,5 @@
 {
+  "prettier.bracketSpacing": true,
   "prettier.eslintIntegration": true,
   "eslint.enable": true,
   "[javascriptreact]": {
