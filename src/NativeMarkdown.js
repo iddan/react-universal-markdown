@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import {View, Text, StyleSheet, Image} from 'react-native';
 import mapValues from 'lodash.mapvalues';
 import shallowEqual from 'shallowequal';
 import Markdown from './Markdown';
+import NativeLink from './NativeLink';
 
 const createMarkdownElement = render =>
   class extends Component {
@@ -24,63 +25,64 @@ const createMarkdownElement = render =>
     }
 
     shouldComponentUpdate(nextProps) {
-      const { styles, ...rest } = this.props;
-      const { nextStyles, ...nextRest } = nextProps;
+      const {styles, ...rest} = this.props;
+      const {nextStyles, ...nextRest} = nextProps;
       return !shallowEqual(styles, nextStyles) || !shallowEqual(rest, nextRest);
     }
 
     render() {
-      const { textStyle } = this.context;
-      return render({ ...this.props, textStyle });
+      const {textStyle} = this.context;
+      return render({...this.props, textStyle});
     }
   };
 
-const LineBreak = ({ style }) =>
+const LineBreak = ({style}) =>
   <Text style={style}>
     {'\n'}
   </Text>;
 
 export const NativeComponents = mapValues(
   {
-    Text: ({ style, textStyle, children }) =>
+    Text: ({style, textStyle, children}) =>
       <Text style={[style, textStyle]}>
         {children}
       </Text>,
     LineBreak,
     SoftBreak: LineBreak,
-    Em: ({ style, children }) =>
+    Em: ({style, children}) =>
       <Text style={style}>
         {children}
       </Text>,
-    Strong: ({ style, children }) =>
+    Strong: ({style, children}) =>
       <Text style={style}>
         {children}
       </Text>,
-    Link: ({ style, title, destination, children }) =>
+    Link: ({style, title, destination, children}) =>
+      <NativeLink style={style} title={title} destination={destination}>
+        {children}
+      </NativeLink>,
+    Image: ({style, title, destination}) =>
+      <Image style={style} source={{uri: destination}} />, // @TODO handle title
+    Code: ({style, children}) =>
       <Text style={style}>
         {children}
       </Text>,
-    Image: ({ style, title, destination }) => <Image style={style} source={{ uri: destination }} />, // @TODO handle title
-    Code: ({ style, children }) =>
-      <Text style={style}>
-        {children}
-      </Text>,
-    Paragraph: ({ style, children }) =>
+    Paragraph: ({style, children}) =>
       <View style={style}>
         <Text>
           {children}
         </Text>
       </View>,
-    BlockQuote: ({ style, children }) =>
+    BlockQuote: ({style, children}) =>
       <View style={style}>
         {children}
       </View>,
-    Item: ({ style, children }) =>
+    Item: ({style, children}) =>
       <View style={style}>
         <Text> • </Text>
         {children}
       </View>,
-    List: ({ style, children, listType, listStart }) => {
+    List: ({style, children, listType, listStart}) => {
       switch (listType) {
         case 'ordered': {
           return (
@@ -98,7 +100,7 @@ export const NativeComponents = mapValues(
         }
       }
     },
-    Heading: ({ styles, style, children, level }) => {
+    Heading: ({styles, style, children, level}) => {
       return (
         <View>
           <Text style={[style, styles['H' + level]]}>
@@ -107,14 +109,14 @@ export const NativeComponents = mapValues(
         </View>
       );
     },
-    CodeBlock: ({ style, children, info }) =>
+    CodeBlock: ({style, children, info}) =>
       <View>
         <Text style={style}>
           {children}
         </Text>
       </View>,
-    ThematicBreak: ({ style }) => <View style={style} />,
-    Document: ({ style, children }) =>
+    ThematicBreak: ({style}) => <View style={style} />,
+    Document: ({style, children}) =>
       <View style={style}>
         {children}
       </View>,
@@ -156,12 +158,12 @@ const defaultStyles = StyleSheet.create({
   Heading: {
     fontWeight: 'bold',
   },
-  H1: { fontSize: 32 },
-  H2: { fontSize: 24 },
-  H3: { fontSize: 18.72 },
-  H4: { fontSize: 16 },
-  H5: { fontSize: 13.28 },
-  H6: { fontSize: 10.72 },
+  H1: {fontSize: 32},
+  H2: {fontSize: 24},
+  H3: {fontSize: 18.72},
+  H4: {fontSize: 16},
+  H5: {fontSize: 13.28},
+  H6: {fontSize: 10.72},
   CodeBlock: {
     fontFamily: 'monospace',
     fontSize: 14,
@@ -180,8 +182,8 @@ const defaultStyles = StyleSheet.create({
 
 class NativeMarkdown extends Component {
   shouldComponentUpdate(nextProps) {
-    const { styles, ...rest } = this.props;
-    const { nextStyles, ...nextRest } = nextProps;
+    const {styles, ...rest} = this.props;
+    const {nextStyles, ...nextRest} = nextProps;
     return !shallowEqual(styles, nextStyles) || !shallowEqual(rest, nextRest);
   }
 
@@ -189,7 +191,7 @@ class NativeMarkdown extends Component {
     <ElementComponent
       {...props}
       textStyle={[defaultStyles[name + 'Text'], this.props.styles[name + 'Text']]}
-      styles={{ ...defaultStyles, ...this.props.styles }}
+      styles={{...defaultStyles, ...this.props.styles}}
       style={[defaultStyles[name], this.props.styles[name]]}
     />,
   );

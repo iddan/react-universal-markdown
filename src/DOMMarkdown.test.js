@@ -1,5 +1,5 @@
 import React from 'react';
-import { renderToStaticMarkup } from 'react-dom/server';
+import {renderToStaticMarkup} from 'react-dom/server';
 import DOMMarkdown from './DOMMarkdown';
 
 test('Em', () => {
@@ -20,7 +20,6 @@ test('Strong', () => {
     ),
   ).toBe('<div><p><strong><span>test</span></strong></p></div>');
 });
-
 test('Link', () => {
   expect(
     renderToStaticMarkup(
@@ -30,7 +29,6 @@ test('Link', () => {
     ),
   ).toBe('<div><p><a title="" href="http://example.com"><span>test</span></a></p></div>');
 });
-
 test('Image', () => {
   expect(
     renderToStaticMarkup(
@@ -40,7 +38,6 @@ test('Image', () => {
     ),
   ).toBe('<div><p><img src="http://example.com" title=""/></p></div>');
 });
-
 test('Code', () => {
   expect(
     renderToStaticMarkup(
@@ -50,7 +47,6 @@ test('Code', () => {
     ),
   ).toBe('<div><p><code>test</code></p></div>');
 });
-
 test('Paragraph', () => {
   expect(
     renderToStaticMarkup(
@@ -60,7 +56,6 @@ test('Paragraph', () => {
     ),
   ).toBe('<div><p><span>test</span></p></div>');
 });
-
 test('BlockQuote', () => {
   expect(
     renderToStaticMarkup(
@@ -79,7 +74,6 @@ test('Item', () => {
     ),
   ).toBe('<div></div>');
 });
-
 test('List', () => {
   expect(
     renderToStaticMarkup(
@@ -93,21 +87,6 @@ test('List', () => {
     '<div><ul><li><p><span>Apple</span></p></li><li><p><span>Banana</span></p></li><li><p><span>Melon</span></p></li></ul></div>',
   );
 });
-
-test('Ordered List', () => {
-  expect(
-    renderToStaticMarkup(
-      <DOMMarkdown>{`
-1. Apple
-2. Banana
-3. Melon  
-  `}</DOMMarkdown>,
-    ),
-  ).toBe(
-    '<div><ol start="1"><li><p><span>Apple</span></p></li><li><p><span>Banana</span></p></li><li><p><span>Melon</span></p></li></ol></div>',
-  );
-});
-
 test('Heading', () => {
   expect(
     renderToStaticMarkup(
@@ -117,7 +96,6 @@ test('Heading', () => {
     ),
   ).toBe('<div><h1><span>Test</span></h1></div>');
 });
-
 test('CodeBlock', () => {
   expect(
     renderToStaticMarkup(
@@ -132,7 +110,6 @@ test('CodeBlock', () => {
   ).toBe(`<div><pre><code>  test
 </code></pre></div>`);
 });
-
 test('ThematicBreak', () => {
   expect(
     renderToStaticMarkup(
@@ -142,7 +119,6 @@ test('ThematicBreak', () => {
     ),
   ).toBe('<div><hr/></div>');
 });
-
 test('Document', () => {
   expect(
     renderToStaticMarkup(
