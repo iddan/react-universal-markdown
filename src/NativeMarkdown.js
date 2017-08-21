@@ -4,6 +4,7 @@ import {View, Text, StyleSheet, Image} from 'react-native';
 import mapValues from 'lodash.mapvalues';
 import shallowEqual from 'shallowequal';
 import Markdown from './Markdown';
+import NativeLink from './NativeLink';
 
 const createMarkdownElement = render =>
   class extends Component {
@@ -57,10 +58,11 @@ export const NativeComponents = mapValues(
         {children}
       </Text>,
     Link: ({style, title, destination, children}) =>
-      <Text style={style}>
+      <NativeLink style={style} title={title} destination={destination}>
         {children}
-      </Text>,
-    Image: ({style, title, destination}) => <Image style={style} source={{uri: destination}} />, // @TODO handle title
+      </NativeLink>,
+    Image: ({style, title, destination}) =>
+      <Image style={style} source={{uri: destination}} />, // @TODO handle title
     Code: ({style, children}) =>
       <Text style={style}>
         {children}
