@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {View, Text, StyleSheet, Image, Linking} from 'react-native';
+import {View, Text, StyleSheet, Image} from 'react-native';
 import mapValues from 'lodash.mapvalues';
 import shallowEqual from 'shallowequal';
 import Markdown from './Markdown';
+import NativeLink from './NativeLink';
 
 const createMarkdownElement = render =>
   class extends Component {
@@ -40,16 +41,6 @@ const LineBreak = ({style}) =>
     {'\n'}
   </Text>;
 
-const openLink = url => async () => {
-  const canOpen = await Linking.canOpenURL(url);
-  if (canOpen) {
-    await Linking.openURL(url);
-  } else {
-    console.warn(`URL "${url}" can not be opened.
-      If you're running on iOS - double check if scheme is allowed https://facebook.github.io/react-native/docs/linking.html#canopenurl`);
-  }
-};
-
 export const NativeComponents = mapValues(
   {
     Text: ({style, textStyle, children}) =>
@@ -67,10 +58,11 @@ export const NativeComponents = mapValues(
         {children}
       </Text>,
     Link: ({style, title, destination, children}) =>
-      <Text style={style} onPress={openLink(destination)}>
+      <NativeLink style={style} title={title} destination={destination}>
         {children}
-      </Text>,
-    Image: ({style, title, destination}) => <Image style={style} source={{uri: destination}} />, // @TODO handle title
+      </NativeLink>,
+    Image: ({style, title, destination}) =>
+      <Image style={style} source={{uri: destination}} />, // @TODO handle title
     Code: ({style, children}) =>
       <Text style={style}>
         {children}
