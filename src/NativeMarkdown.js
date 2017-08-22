@@ -61,8 +61,7 @@ export const NativeComponents = mapValues(
       <NativeLink style={style} title={title} destination={destination}>
         {children}
       </NativeLink>,
-    Image: ({style, title, destination}) =>
-      <Image style={style} source={{uri: destination}} />, // @TODO handle title
+    Image: ({style, title, destination}) => <Image style={style} source={{uri: destination}} />, // @TODO handle title
     Code: ({style, children}) =>
       <Text style={style}>
         {children}
@@ -190,7 +189,11 @@ class NativeMarkdown extends Component {
   components = mapValues(NativeComponents, (ElementComponent, name) => props =>
     <ElementComponent
       {...props}
-      textStyle={[defaultStyles[name + 'Text'], this.props.styles[name + 'Text']]}
+      textStyle={[
+        defaultStyles[name + 'Text'],
+        this.props.styles[name + 'Text'],
+        ElementComponent === NativeComponents.Heading ? this.props.styles['H' + props.level + 'Text'] : null,
+      ]}
       styles={{...defaultStyles, ...this.props.styles}}
       style={[defaultStyles[name], this.props.styles[name]]}
     />,
