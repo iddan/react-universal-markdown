@@ -44,7 +44,7 @@ const LineBreak = ({style}) =>
 export const NativeComponents = mapValues(
   {
     Text: ({style, textStyle, children}) =>
-      <Text style={[style, textStyle]}>
+      <Text numberOfLines={numberOfLines} style={[style, textStyle]}>
         {children}
       </Text>,
     LineBreak,
@@ -68,9 +68,7 @@ export const NativeComponents = mapValues(
       </Text>,
     Paragraph: ({style, children}) =>
       <View style={style}>
-        <Text>
-          {children}
-        </Text>
+          <Text numberOfLines={numberOfLines}>{children}</Text>
       </View>,
     BlockQuote: ({style, children}) =>
       <View style={style}>
@@ -196,6 +194,7 @@ class NativeMarkdown extends Component {
       ]}
       styles={{...defaultStyles, ...this.props.styles}}
       style={[defaultStyles[name], this.props.styles[name]]}
+      numberOfLines={this.props.numberOfLines}
     />,
   );
 
