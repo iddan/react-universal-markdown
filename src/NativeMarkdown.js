@@ -135,8 +135,8 @@ const defaultStyles = StyleSheet.create({
     // sizing
   },
   Code: {
-    fontFamily: 'monospace',
-    fontSize: 14,
+    // fontFamily: 'monospace',
+    // fontSize: 14,
   },
   Paragraph: {
     marginTop: 16,
@@ -162,8 +162,8 @@ const defaultStyles = StyleSheet.create({
   H5: {fontSize: 13.28},
   H6: {fontSize: 10.72},
   CodeBlock: {
-    fontFamily: 'monospace',
-    fontSize: 14,
+    // fontFamily: 'monospace',
+    // fontSize: 14,
   },
   ThematicBreak: {
     width: '100%',
