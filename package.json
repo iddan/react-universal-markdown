@@ -1,17 +1,15 @@
 {
   "name": "react-universal-markdown",
   "version": "0.0.21",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "author": "Iddan Aharonson <mail@aniddan.com> (https://github.com/iddan)",
   "peerDependencies": {
     "react-native": "^0.46.4"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
     "babel-jest": "^20.0.3",
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-plugin-transform-object-rest-spread": "^6.23.0",
-    "babel-preset-env": "^1.6.0",
-    "babel-preset-react": "^6.24.1",
+    "babel-preset-react-app": "^3.0.3",
     "coveralls": "^2.13.1",
     "eslint": "^4.3.0",
     "eslint-config-fbjs-opensource": "^1.0.0",
@@ -27,7 +25,7 @@
   },
   "description": "Markdown component for Web and Native powered by CommonMark",
   "scripts": {
-    "test": "jest && cat ./coverage/lcov.info | coveralls"
+    "build": "NODE_ENV=production babel src --out-dir dist --copy-files"
   },
   "repository": {
     "type": "git",

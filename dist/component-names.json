@@ -1,0 +1,18 @@
+{
+  "text": "Text",
+  "linebreak": "LineBreak",
+  "softbreak": "SoftBreak",
+  "emph": "Em",
+  "strong": "Strong",
+  "link": "Link",
+  "image": "Image",
+  "code": "Code",
+  "paragraph": "Paragraph",
+  "block_quote": "BlockQuote",
+  "item": "Item",
+  "list": "List",
+  "heading": "Heading",
+  "code_block": "CodeBlock",
+  "thematic_break": "ThematicBreak",
+  "document": "Document"
+}

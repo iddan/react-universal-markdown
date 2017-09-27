@@ -1,0 +1,18 @@
+h1 {
+  font-size: 4em;
+}
+
+article {
+  max-width: 50em;
+  margin: 5em auto;
+}
+
+img {
+  width: 25em;
+  float: right;
+}
+
+img::after {
+  content: attr(alt);
+}
+

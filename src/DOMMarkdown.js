@@ -22,7 +22,10 @@ export const DOMComponents = {
     <a title={title} href={destination}>
       {children}
     </a>,
-  Image: ({title, destination}) => <img src={destination} title={title} />,
+  Image: ({title, destination, children}) => {
+    const [firstChild] = children;
+    return <img src={destination} alt={firstChild.props.children} />;
+  },
   Code: ({children}) =>
     <code>
       {children}
