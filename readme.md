@@ -35,7 +35,7 @@ npm install react-universal-markdown
 *With React DOM*
 ```jsx
 import React, { Component } from 'react'
-import { DOMMarkdown as Markdown } from 'react-universal-markdown'
+import Markdown from 'react-universal-markdown/dom'
 
 export default class App extends Component {
   render() {
@@ -51,7 +51,7 @@ export default class App extends Component {
 *With React Native*
 ```jsx
 import React, { Component } from 'react'
-import { NativeMarkdown as Markdown } from 'react-universal-markdown'
+import Markdown from 'react-universal-markdown/native'
 
 export default class App extends Component {
   render() {
