@@ -43,7 +43,7 @@ const LineBreak = ({style}) =>
 
 export const NativeComponents = mapValues(
   {
-    Text: ({style, textStyle, children}) =>
+    Text: ({style, textStyle, children, numberOfLines}) =>
       <Text numberOfLines={numberOfLines} style={[style, textStyle]}>
         {children}
       </Text>,
@@ -61,14 +61,16 @@ export const NativeComponents = mapValues(
       <NativeLink style={style} title={title} destination={destination}>
         {children}
       </NativeLink>,
-    Image: ({style, title, destination}) => <Image style={style} source={{uri: destination}} />, // @TODO handle title
+    Image: ({style, children, destination}) => <Image style={style} source={{uri: destination}} />, // @TODO handle title
     Code: ({style, children}) =>
       <Text style={style}>
         {children}
       </Text>,
-    Paragraph: ({style, children}) =>
+    Paragraph: ({style, numberOfLines, children}) =>
       <View style={style}>
-          <Text numberOfLines={numberOfLines}>{children}</Text>
+        <Text numberOfLines={numberOfLines}>
+          {children}
+        </Text>
       </View>,
     BlockQuote: ({style, children}) =>
       <View style={style}>
@@ -184,19 +186,22 @@ class NativeMarkdown extends Component {
     return !shallowEqual(styles, nextStyles) || !shallowEqual(rest, nextRest);
   }
 
-  components = mapValues(NativeComponents, (ElementComponent, name) => props =>
-    <ElementComponent
-      {...props}
-      textStyle={[
-        defaultStyles[name + 'Text'],
-        this.props.styles[name + 'Text'],
-        ElementComponent === NativeComponents.Heading ? this.props.styles['H' + props.level + 'Text'] : null,
-      ]}
-      styles={{...defaultStyles, ...this.props.styles}}
-      style={[defaultStyles[name], this.props.styles[name]]}
-      numberOfLines={this.props.numberOfLines}
-    />,
-  );
+  components = mapValues(NativeComponents, (ElementComponent, name) => elementProps => {
+    const {styles = {}, numberOfLines} = this.props;
+    return (
+      <ElementComponent
+        {...elementProps}
+        textStyle={[
+          defaultStyles[name + 'Text'],
+          styles[name + 'Text'],
+          ElementComponent === NativeComponents.Heading ? styles['H' + elementProps.level + 'Text'] : null,
+        ]}
+        styles={{...defaultStyles, ...styles}}
+        style={[defaultStyles[name], styles[name]]}
+        numberOfLines={numberOfLines}
+      />
+    );
+  });
 
   render() {
     return <Markdown {...this.props} components={this.components} />;

@@ -77,7 +77,8 @@ export var NativeComponents = mapValues({
   Text: function Text(_ref2) {
     var style = _ref2.style,
         textStyle = _ref2.textStyle,
-        children = _ref2.children;
+        children = _ref2.children,
+        numberOfLines = _ref2.numberOfLines;
     return React.createElement(
       _Text,
       { numberOfLines: numberOfLines, style: [style, textStyle] },
@@ -132,6 +133,7 @@ export var NativeComponents = mapValues({
   },
   Paragraph: function Paragraph(_ref8) {
     var style = _ref8.style,
+        numberOfLines = _ref8.numberOfLines,
         children = _ref8.children;
     return React.createElement(
       View,
@@ -307,12 +309,17 @@ var NativeMarkdown = function (_Component2) {
     }
 
     return _ret = (_temp2 = (_this2 = _possibleConstructorReturn(this, (_ref16 = NativeMarkdown.__proto__ || Object.getPrototypeOf(NativeMarkdown)).call.apply(_ref16, [this].concat(args))), _this2), _this2.components = mapValues(NativeComponents, function (ElementComponent, name) {
-      return function (props) {
-        return React.createElement(ElementComponent, Object.assign({}, props, {
-          textStyle: [defaultStyles[name + 'Text'], _this2.props.styles[name + 'Text'], ElementComponent === NativeComponents.Heading ? _this2.props.styles['H' + props.level + 'Text'] : null],
-          styles: Object.assign({}, defaultStyles, _this2.props.styles),
-          style: [defaultStyles[name], _this2.props.styles[name]],
-          numberOfLines: _this2.props.numberOfLines
+      return function (elementProps) {
+        var _this2$props = _this2.props,
+            _this2$props$styles = _this2$props.styles,
+            styles = _this2$props$styles === undefined ? {} : _this2$props$styles,
+            numberOfLines = _this2$props.numberOfLines;
+
+        return React.createElement(ElementComponent, Object.assign({}, elementProps, {
+          textStyle: [defaultStyles[name + 'Text'], styles[name + 'Text'], ElementComponent === NativeComponents.Heading ? styles['H' + elementProps.level + 'Text'] : null],
+          styles: Object.assign({}, defaultStyles, styles),
+          style: [defaultStyles[name], styles[name]],
+          numberOfLines: numberOfLines
         }));
       };
     }), _temp2), _possibleConstructorReturn(_this2, _ret);

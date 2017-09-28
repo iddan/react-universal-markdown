@@ -1,17 +1,25 @@
-import React, {Component} from 'react';
-import Markdown from 'react-universal-markdown/dom';
-import './App.css';
+/**
+ * Sample React Native App
+ * https://github.com/facebook/react-native
+ * @flow
+ */
 
-class App extends Component {
+import React, {Component} from 'react';
+import {AppRegistry, StyleSheet, ScrollView} from 'react-native';
+import Markdown from 'react-universal-markdown/native';
+
+// not working: ![Nirvana Sappy (Smart Studio Session)](https://i.ytimg.com/vi/YFnsL0NuN0Q/0.jpg)
+
+export default class native extends Component {
   render() {
     return (
-      <article>
+      <ScrollView>
         <Markdown>{`
 # Sappy
 
 ## *A song by [Nirvana](https://en.wikipedia.org/wiki/Nirvana_(band)) from the album [Bleach](https://en.wikipedia.org/wiki/Bleach_(Nirvana_album))*
 
-![Nirvana Sappy (Smart Studio Session)](https://i.ytimg.com/vi/YFnsL0NuN0Q/0.jpg)
+
 
 **Verse 1**
 
@@ -82,9 +90,28 @@ You will think you're happy now
 7. With the Lights Out
 8. In Utero (deluxe)
       `}</Markdown>
-      </article>
+      </ScrollView>
     );
   }
 }
 
-export default App;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
+  },
+  welcome: {
+    fontSize: 20,
+    textAlign: 'center',
+    margin: 10,
+  },
+  instructions: {
+    textAlign: 'center',
+    color: '#333333',
+    marginBottom: 5,
+  },
+});
+
+AppRegistry.registerComponent('native', () => native);
