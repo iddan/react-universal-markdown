@@ -66,9 +66,9 @@ export const NativeComponents = mapValues(
       <Text style={style}>
         {children}
       </Text>,
-    Paragraph: ({style, numberOfLines, children}) =>
+    Paragraph: ({style, textStyle, numberOfLines, children}) =>
       <View style={style}>
-        <Text numberOfLines={numberOfLines}>
+        <Text style={textStyle} numberOfLines={numberOfLines}>
           {children}
         </Text>
       </View>,

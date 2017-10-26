@@ -36,7 +36,6 @@ class Markdown extends Component {
 
   render() {
     const {components, customizer, children} = this.props;
-    console.log(this.parser.parse(children));
     return render(components, customizer, this.parser.parse(children));
   }
 }
