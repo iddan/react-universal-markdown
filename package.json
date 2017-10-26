@@ -25,7 +25,8 @@
   },
   "description": "Markdown component for Web and Native powered by CommonMark",
   "scripts": {
-    "build": "NODE_ENV=production babel src --out-dir dist --copy-files"
+    "build": "NODE_ENV=production babel src --out-dir dist --copy-files",
+    "prepare": "npm run build"
   },
   "repository": {
     "type": "git",
