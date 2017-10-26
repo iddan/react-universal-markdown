@@ -6,6 +6,7 @@
   },
   "files.exclude": {
     "node_modules/": "explorerExcludedFiles",
-    "coverage/": "explorerExcludedFiles"
+    "coverage/": "explorerExcludedFiles",
+    "dist/": "explorerExcludedFiles"
   }
 }
