@@ -20,7 +20,7 @@
     </a>
   </p>
   <img alt="Markdown Logo" width="195" src="https://cdn.rawgit.com/iddan/react-universal-markdown/master/assets/markdown.svg" />
-  <img alt="React Logo" width="300" src="https://upload.wikimedia.org/wikipedia/en/a/a7/React-icon.svg" />
+  <img alt="React Logo" width="300" src="https://cdn.rawgit.com/iddan/react-universal-markdown/master/assets/react.svg" />
   <h1>react-universal-markdown</h1>
 </div>
 
