@@ -3562,9 +3562,9 @@ react-transform-hmr@^1.0.4:
     global "^4.3.0"
     react-proxy "^1.1.7"
 
-react-universal-markdown@^0.0.23:
-  version "0.0.23"
-  resolved "https://registry.yarnpkg.com/react-universal-markdown/-/react-universal-markdown-0.0.23.tgz#5a4639a185248b454a3c97d7bdeac3c981100d24"
+react-universal-markdown@^0.0.26:
+  version "0.0.26"
+  resolved "https://registry.yarnpkg.com/react-universal-markdown/-/react-universal-markdown-0.0.26.tgz#122b0c911080e3c7e36dc2f2bc29f90ef025f860"
   dependencies:
     commonmark "^0.27.0"
     lodash.mapvalues "^4.6.0"

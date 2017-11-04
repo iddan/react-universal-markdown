@@ -36,89 +36,62 @@ const createMarkdownElement = render =>
     }
   };
 
-const LineBreak = ({style}) =>
-  <Text style={style}>
-    {'\n'}
-  </Text>;
+const LineBreak = ({style}) => <Text style={style}>{'\n'}</Text>;
 
 export const NativeComponents = mapValues(
   {
-    Text: ({style, textStyle, children, numberOfLines}) =>
+    Text: ({style, textStyle, children, numberOfLines}) => (
       <Text numberOfLines={numberOfLines} style={[style, textStyle]}>
         {children}
-      </Text>,
+      </Text>
+    ),
     LineBreak,
     SoftBreak: LineBreak,
-    Em: ({style, children}) =>
-      <Text style={style}>
-        {children}
-      </Text>,
-    Strong: ({style, children}) =>
-      <Text style={style}>
-        {children}
-      </Text>,
-    Link: ({style, title, destination, children}) =>
+    Em: ({style, children}) => <Text style={style}>{children}</Text>,
+    Strong: ({style, children}) => <Text style={style}>{children}</Text>,
+    Link: ({style, title, destination, children}) => (
       <NativeLink style={style} title={title} destination={destination}>
         {children}
-      </NativeLink>,
+      </NativeLink>
+    ),
     Image: ({style, children, destination}) => <Image style={style} source={{uri: destination}} />, // @TODO handle title
-    Code: ({style, children}) =>
-      <Text style={style}>
-        {children}
-      </Text>,
-    Paragraph: ({style, textStyle, numberOfLines, children}) =>
+    Code: ({style, children}) => <Text style={style}>{children}</Text>,
+    Paragraph: ({style, textStyle, numberOfLines, children}) => (
       <View style={style}>
         <Text style={textStyle} numberOfLines={numberOfLines}>
           {children}
         </Text>
-      </View>,
-    BlockQuote: ({style, children}) =>
-      <View style={style}>
-        {children}
-      </View>,
-    Item: ({style, children}) =>
+      </View>
+    ),
+    BlockQuote: ({style, children}) => <View style={style}>{children}</View>,
+    Item: ({style, children}) => (
       <View style={style}>
         <Text> • </Text>
         {children}
-      </View>,
+      </View>
+    ),
     List: ({style, children, listType, listStart}) => {
       switch (listType) {
         case 'ordered': {
-          return (
-            <View style={style}>
-              {children}
-            </View>
-          );
+          return <View style={style}>{children}</View>;
         }
         default: {
-          return (
-            <View style={style}>
-              {children}
-            </View>
-          );
+          return <View style={style}>{children}</View>;
         }
       }
     },
-    Heading: ({styles, style, children, level}) => {
-      return (
-        <View>
-          <Text style={[style, styles['H' + level]]}>
-            {children}
-          </Text>
-        </View>
-      );
-    },
-    CodeBlock: ({style, children, info}) =>
+    Heading: ({style, textStyle, children, level}) => (
       <View>
-        <Text style={style}>
-          {children}
-        </Text>
-      </View>,
+        <Text style={[textStyle, style]}>{children}</Text>
+      </View>
+    ),
+    CodeBlock: ({style, children, info}) => (
+      <View>
+        <Text style={style}>{children}</Text>
+      </View>
+    ),
     ThematicBreak: ({style}) => <View style={style} />,
-    Document: ({style, children}) =>
-      <View style={style}>
-        {children}
-      </View>,
+    Document: ({style, children}) => <View style={style}>{children}</View>,
   },
   createMarkdownElement,
 );
@@ -177,6 +150,9 @@ const defaultStyles = StyleSheet.create({
   Document: {
     margin: 8,
   },
+  DocumentText: {
+    textAlign: 'left',
+  },
 });
 
 class NativeMarkdown extends Component {
@@ -188,19 +164,25 @@ class NativeMarkdown extends Component {
 
   components = mapValues(NativeComponents, (ElementComponent, name) => elementProps => {
     const {styles = {}, numberOfLines} = this.props;
-    return (
-      <ElementComponent
-        {...elementProps}
-        textStyle={[
-          defaultStyles[name + 'Text'],
-          styles[name + 'Text'],
-          ElementComponent === NativeComponents.Heading ? styles['H' + elementProps.level + 'Text'] : null,
-        ]}
-        styles={{...defaultStyles, ...styles}}
-        style={[defaultStyles[name], styles[name]]}
-        numberOfLines={numberOfLines}
-      />
-    );
+    const textStyle =
+      ElementComponent === NativeComponents.Heading
+        ? [
+          defaultStyles.HeadingText,
+          styles.HeadingText,
+          defaultStyles['H' + elementProps.level + 'Text'],
+          styles['H' + elementProps.level + 'Text'],
+        ]
+        : [defaultStyles[name + 'Text'], styles[name + 'Text']];
+    const style =
+      ElementComponent === NativeComponents.Heading
+        ? [
+          defaultStyles.Heading,
+          styles.Heading,
+          defaultStyles['H' + elementProps.level],
+          styles['H' + elementProps.level],
+        ]
+        : [defaultStyles[name], styles[name]];
+    return <ElementComponent {...elementProps} textStyle={textStyle} style={style} numberOfLines={numberOfLines} />;
   });
 
   render() {

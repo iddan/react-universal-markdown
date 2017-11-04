@@ -5,8 +5,8 @@
  */
 
 import React, {Component} from 'react';
-import {AppRegistry, StyleSheet, ScrollView} from 'react-native';
-import Markdown from 'react-universal-markdown/native';
+import {AppRegistry, StyleSheet, ScrollView, I18nManager} from 'react-native';
+import {NativeMarkdown as Markdown} from 'react-universal-markdown';
 
 // not working: ![Nirvana Sappy (Smart Studio Session)](https://i.ytimg.com/vi/YFnsL0NuN0Q/0.jpg)
 
