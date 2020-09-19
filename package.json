@@ -1,6 +1,6 @@
 {
   "name": "react-universal-markdown",
-  "version": "0.0.27",
+  "version": "0.0.28",
   "main": "dist/index.js",
   "author": "Iddan Aharonson <mail@aniddan.com> (https://github.com/iddan)",
   "peerDependencies": {
